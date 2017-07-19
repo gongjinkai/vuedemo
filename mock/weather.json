@@ -1,0 +1,22 @@
+{
+    "reason": "暂无数据!",
+    "result": {
+        "sk": {
+            "temp": "暂无数据",
+            "wind_direction": "暂无数据",
+            "wind_strength": "暂无数据",
+            "humidity": "暂无数据",
+            "time": "暂无数据"
+        },
+        "today": {
+            "city": "暂无数据",
+            "date_y": "暂无数据",
+            "week": "暂无数据",
+            "temperature": "暂无数据",
+            "weather": "暂无数据",
+            "dressing_index": "暂无数据",
+            "dressing_advice": "暂无数据",
+            "exercise_index": "暂无数据"
+        }
+    }
+}
