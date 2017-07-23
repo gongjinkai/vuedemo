@@ -3,3 +3,4 @@
 # 下载项目后 npm install 安装相关依赖
 # 推荐使用cnpm install 淘宝源可自行百度安装
 # npm run dev 运行此项目
+# screenshots 文件夹内为项目截图
