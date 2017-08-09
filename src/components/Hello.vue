@@ -22,18 +22,20 @@
       </li>
     </ul>
   </div>
-  <div class="shop" :data="tableData">
+  <div class="shop">
     <h4>购物车</h4>
-    <p>数量{{totalCount}}<p>
-    <p>总价</p>
+    <p>数量{{getCount()}}<p>
+    <p>{{ getTotalMount() | round}}</p>
     </div>
     <div class="newslist">
       <ul>
-        <li v-for="item in oftenGoods">
+        <li v-for="(item,index) in oftenGoods">
           	 <img :src="item.goodsImg">
             <h5>{{item.goodsName}}</h5>
             <p>{{item.price}}￥</p>
-            <button class="btn btn-danger" @click="addList()">增加</button>
+          <em class="btn btn-primary add" @click="minus(item)" :class="{off:item.count==11}">-</em>
+          {{item.count}}
+          <em class="btn btn-primary reduce" @click="plus(item)" :class="{off:item.count==1}">+</em>
         </li>
       </ul>
     </div>
@@ -44,14 +46,51 @@
   export default {
     data () {
       return {
-        tableData: [],
         oftenGoods: [],
-        totalMoney: 0,
-        totalCount: 0
+        totalMoney: 0
       }
     },
     components: {
       foodSwiper
+    },
+    filters: {
+      round: function (value) {
+        return value.toFixed(2)
+      }
+    },
+    computed: {
+      balance () {
+        return this.$store.state.counts
+      }
+    },
+    methods: {
+      plus: function (item) {
+        this.$store.dispatch('increment')
+        item.count++
+      },
+      minus: function (item) {
+        this.$store.dispatch('increment')
+        if (item.count > 1) {
+          item.count--
+          this.$emit('change')
+        } else {
+          item.count = 1
+        }
+      },
+      getTotalMount: function () {
+        var sum = 0
+        this.oftenGoods.forEach(function (value, index) {
+          sum += value.count * value.price
+        })
+        return sum
+      },
+      getCount: function () {
+        var foodsCount = 0
+        this.oftenGoods.forEach(function (value, index) {
+          foodsCount += value.count
+        })
+        return foodsCount
+      }
     },
     created: function () {
       var _this = this
@@ -139,4 +178,8 @@
 .shop{
 	 border-bottom: 1px solid #a9a1a1;
 }
+  .count{
+    width:30%;
+    display: inline-block;
+  }
 </style>
